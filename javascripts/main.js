@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	var CANVAS_WIDTH = 800;
 	var CANVAS_HEIGHT = 600;
-	var FPS = 1000;
+	var FPS = 30;
 	
 	var canvasElement = $("<canvas width='" + CANVAS_WIDTH + 
 	  "' height='" + CANVAS_HEIGHT + "'></canvas");
@@ -17,7 +17,9 @@ $(document).ready(function(){
 	var x=0;
 	var y=0;
 
+
 	function update() {
+	//$(document).keydown(function(){
 	  if(keydown.space) {
 	  }
 
@@ -30,6 +32,7 @@ $(document).ready(function(){
 	  }
 
 	}
+	//);
 
 
 	function draw() {
