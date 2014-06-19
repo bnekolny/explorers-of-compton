@@ -1,15 +1,15 @@
 
-//var location = 0;
+var myLocation = 0;
 
-//function moveLocation(direction)
-//{
-//  if((direction<0) && (location >0)){
-//    location--;
-//    }
-//  if((direction>0) && (location <3)){
-//    location++;
-//   } 
-//}
+function moveLocation(direction)
+{
+  if((direction<0) && (myLocation >0)){
+    myLocation--;
+    }
+  if((direction>0) && (myLocation <3)){
+    myLocation++;
+   } 
+}
 
 function drawBoard(canvas,width,height) {
 
@@ -24,11 +24,11 @@ function drawBoard(canvas,width,height) {
   canvas.strokeStyle = 'blue';
   canvas.stroke();
 
-  //draw location
-  //var tl = width/8 + 5;
-  //var tr = width/8 + 80 + 5;
-  //canvas.rect(tl+location*100,height/8,70,70);
-  //canvas.fillStyle = 'red';
-  //canvas.fill();
+  //draw myLocation
+  var tl = width/8 + 5;
+  var tr = width/8 + 80 + 5;
+  canvas.rect(tl+myLocation*100,height/8,70,70);
+  canvas.fillStyle = 'red';
+  canvas.fill();
   
 }
