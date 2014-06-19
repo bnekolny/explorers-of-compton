@@ -1,4 +1,4 @@
 catan5
 ======
 
-html5 catan app
+html5 place to build apps
