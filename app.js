@@ -8,4 +8,5 @@ app.get('/', function(request, response) {
     app.use('/images', express.static(__dirname + '/images'));
     app.use('/javascripts', express.static(__dirname + '/javascripts'));
     app.use('/stylesheets', express.static(__dirname + '/stylesheets'));
+    app.use('/sounds', express.static(__dirname + '/sounds'));
 }).listen(port);
