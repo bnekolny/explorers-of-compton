@@ -6,4 +6,6 @@ app.get('/', function(request, response) {
     response.sendfile(__dirname + '/index.html');
 }).configure(function() {
     app.use('/images', express.static(__dirname + '/images'));
+    app.use('/javascripts', express.static(__dirname + '/javascripts'));
+    app.use('/stylesheets', express.static(__dirname + '/stylesheets'));
 }).listen(port);
