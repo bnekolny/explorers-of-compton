@@ -22,11 +22,11 @@ $(document).ready(function(){
 	  }
 
 	  if(keydown.left) {
-		//x -= 10;
+		moveLocation(-1)
 	  }
 
 	  if(keydown.right) {
-		//x += 10;
+		moveLocation(+1)
 	  }
 
 	}

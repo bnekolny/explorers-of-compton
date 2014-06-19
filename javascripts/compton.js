@@ -25,10 +25,10 @@ function drawBoard(canvas,width,height) {
   canvas.stroke();
 
   //draw myLocation
-  var tl = width/8 + 5;
-  var tr = width/8 + 80 + 5;
-  canvas.rect(tl+myLocation*100,height/8,70,70);
+  var tl = width/8 + 2.5;
+  var tr = width/8 + 80 + 2.5;
   canvas.fillStyle = 'red';
-  canvas.fill();
+  canvas.fillRect(tl+myLocation*100,height/8,75,75);
+  
   
 }
