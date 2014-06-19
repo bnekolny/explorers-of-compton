@@ -1,0 +1,19 @@
+/* line 1 */
+body {
+  font-family: Verdana;
+  font-size: 10pt;
+}
+
+#screen {
+	width: 800px;
+}
+
+#cat {
+	border: 20px solid red;
+	display: inline-block;
+}
+#dog {
+	border: 20px solid blue;
+	width: 100%;
+	clear:both;
+}
