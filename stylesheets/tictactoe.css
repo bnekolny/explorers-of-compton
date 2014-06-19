@@ -1,0 +1,38 @@
+/* line 1 */
+body {
+	font-family: Verdana;
+	font-size: 10pt;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+
+#screen {
+	width: 300px;
+}
+
+#header {
+	border: 25px solid blue;
+	width: 100%;
+	clear:both;
+	border-radius: 20px;
+	text-align:center;
+	
+}
+
+#gui {
+	border: 25px solid red;
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	width:100%;
+	border-radius: 20px;
+}
+#footer {
+	border: 25px solid blue;
+	width: 100%;
+	clear:both;
+	border-radius: 20px;
+	text-align:center;
+}
