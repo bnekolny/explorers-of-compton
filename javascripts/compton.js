@@ -1,5 +1,5 @@
 
-var location = 0;
+//var location = 0;
 
 //function moveLocation(direction)
 //{
