@@ -1,1 +1,1 @@
-<html><body>You are being <a href="https://raw.githubusercontent.com/adityabansod/static-heroku-node/master/Procfile">redirected</a>.</body></html>
+web: node app.js
