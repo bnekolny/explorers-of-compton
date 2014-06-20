@@ -53,19 +53,115 @@ $(document).ready(function(){
     context.fillRect(xStart,yStart, h.width/3, h.height/3);   
   }
 
-  var h=document.getElementById("guicanvas");
-  h.addEventListener("mousemove", function(evt){
-        var context = h.getContext('2d');
-    
-    
-        context.clearRect(0, 0, h.width, h.height);
-        context.beginPath()
+function drawGrid(myContext,myW,myH){
+  myContext.beginPath();
   
-        var mousePos = getMousePos(canvasElement.get(0), evt);
-        //console.log("test " + mousePos.x + " " + mousePos.y + " " +h.width/3 + " " + h.height/3);
-          highlightMouseOver(h, mousePos);
-        
-      }, false);
+  // vertical lines
+  myContext.moveTo(myW/3,0);
+  myContext.lineTo(myW/3,myH);
+  myContext.moveTo(2*myW/3,0);
+  myContext.lineTo(2*myW/3,myH);
+
+  //horizontal lines
+  myContext.moveTo(0,myH/3);
+  myContext.lineTo(myW,myH/3);
+  myContext.moveTo(0, 2*myH/3);
+  myContext.lineTo(myW,2*myH/3);
+  myContext.lineWidth = 15;
+
+  myContext.stroke();
+
+}
+
+
+function drawMarks(myContext,myW,myH){
+  myContext.beginPath();
+  
+  for(var row=0;row<3;row++){
+    for(var col=0;col<3;col++){
+      if(boardValues[row][col] ==1){
+        context.fillStyle= "green";  
+        context.fillRect(col*h.width/3+h.width/12,row*h.height/3+h.height/12, h.width/6, h.height/6);   
+      }
+      if(boardValues[row][col] ==2){
+        context.fillStyle= "pink";  
+        context.fillRect(col*h.width/3+h.width/12,row*h.height/3+h.height/12, h.width/6, h.height/6);   
+      }
+    }
+  }
+}
+
+var boardValues = [[0,0,0],[0,0,0],[0,0,0]];
+var turnValue = 1;
+
+
+var h=document.getElementById("guicanvas");
+var context = h.getContext('2d');
+
+context.clearRect(0, 0, h.width, h.height);
+context.beginPath()
+drawGrid(context, h.width, h.height);
+
+
+
+
+h.addEventListener("mousemove", function(evt){
+  
+  
+      context.clearRect(0, 0, h.width, h.height);
+      context.beginPath()
+
+      var mousePos = getMousePos(canvasElement.get(0), evt);
+      //console.log("test " + mousePos.x + " " + mousePos.y + " " +h.width/3 + " " + h.height/3);
+      highlightMouseOver(h, mousePos);
+      drawGrid(context, h.width, h.height);
+      drawMarks(context, h.width, h.height);
+    }, false);
+
+
+
+
+
+h.addEventListener("mousedown", function(mousePos){
+  
+  var row=0;
+  var col=0;
+  var adjX = mousePos.x - h.offsetLeft;
+  var adjY = mousePos.y - h.offsetTop;
+  // Draw mouse over box
+  if((adjX < h.width/3)){
+    col =0;
+  }
+  else if((adjX < 2*h.width/3)){
+    col =1;
+  }
+  else if((adjX < h.width)){
+    col =2;
+  }
+
+
+  if((adjY < h.height/3)){
+    row =0;
+  }
+  else if((adjY < 2*h.height/3)){
+    row =1;
+  }
+  else if((adjY < h.height)){
+    row =2;
+  }    
+
+
+  if(boardValues[row][col] == 0){
+    boardValues[row][col] = turnValue;
+    if(turnValue == 1)
+      turnValue = 2;
+    else
+      turnValue = 1;
+  }
+  console.log("x" + adjX + " y " + adjY);
+  console.log("Clicked in row " + row + " and col " + col);
+
+    }, false);
 
 
 
