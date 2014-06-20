@@ -6,7 +6,9 @@ body {
 	padding: 0px;
 }
 
-
+img {
+	display: none;
+}
 
 #screen {
 	width: 300px;
@@ -28,6 +30,7 @@ body {
 	padding: 0px;
 	width:100%;
 	border-radius: 20px;
+	cursor: url(../images/pencil.png), auto;
 }
 #footer {
 	border: 25px solid blue;
