@@ -1,5 +1,6 @@
 var application_root = __dirname,
     express = require('express'),
+    bodyParser = require('body-parser'),
     rollbar = require('rollbar'),
     MongoClient = require('mongodb').MongoClient,
     format = require('util').format,
@@ -7,6 +8,9 @@ var application_root = __dirname,
     port = process.env.PORT || 5000;
 
 var app = express();
+
+app.use(bodyParser.json());
+app.use(express.json());
 
 rollbar.init(process.env.ROLLBAR_ACCESS_TOKEN);
 
@@ -69,6 +73,16 @@ app.get('/tictactoe', function(request, response) {
 app.get('/tictactoe/api', function (request, response) {
     getTicTacToeGames(function(games) {
         response.send({'games': games});
+    });
+});
+
+app.post('/tictactoe/api', function (request, response) {
+    doc = {'player1': req.body.player1};
+    request.db.collection('tictactoe').insert(doc, function(err, objects) {
+        if (err) {
+            rollbar.reportMessage("Mongo error: " + err + "; objects: " + objects);
+            console.error("Mongo error: " + err + "; objects: " + objects);
+        }
     });
 });
 
