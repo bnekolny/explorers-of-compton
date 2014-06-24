@@ -11,6 +11,7 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(express.bodyParser());
 
 
 // Database
@@ -80,7 +81,7 @@ app.post('/tictactoe/api', function (request, response) {
     /* Params:
      * player1
      * player2 */
-    console.log(request);
+    console.log(request.body);
     request.db.collection('tictactoe').save(request.body, function(err, objects) {
         if (err) {
             rollbar.reportMessage("Mongo error: " + err + "; objects: " + objects);
