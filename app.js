@@ -85,6 +85,7 @@ app.post('/tictactoe/api', function (request, response) {
             rollbar.reportMessage("Mongo error: " + err + "; objects: " + objects);
             console.error("Mongo error: " + err + "; objects: " + objects);
         }
+        response.send({'game': objects});
     });
 });
 
