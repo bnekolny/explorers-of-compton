@@ -10,22 +10,27 @@ var app = express();
 // Database
 mongo_connection = null;
 app.configure('production', function () {
-    //mongo_connection = 'mongodb://tictactoe:bc64c5cb9171f5f562697926ba32d8ea@kahana.mongohq.com:10062/app26528232';
-    mongo_connection = 'mongodb://tictactoe:tictactoe@kahana.mongohq.com:10062/app26528232';
+    mongo_connection = 'mongodb://tictactoe:bc64c5cb9171f5f562697926ba32d8ea@kahana.mongohq.com:10062/app26528232';
 });
 
 app.configure('development', function () {
-    //mongo_connection = 'mongodb://tictactoe:bc64c5cb9171f5f562697926ba32d8ea@localhost:27017';
     mongo_connection = 'mongodb://localhost:27017';
 });
 
 var mongo = null;
 MongoClient.connect(mongo_connection, function(err, db) {
-    mongo = db;
     if (err) {
         console.error(err);
     }
+    mongo = db;
 })
+
+// Making mongo available on the request
+app.use(function(request, response, next) {
+    request.db = mongo;
+    next();
+});
+
 
 // Requests
 app.get('/', function(request, response) {
@@ -45,7 +50,7 @@ app.get('/tictactoe', function(request, response) {
     games = getTicTacToeGames(function(games) {
         // If there aren't any games, create one
         if (games.length == 0) {
-            collection = mongo.collection('tictactoe');
+            collection = request.db.collection('tictactoe');
             collection.insert({}, function(err, objects) {
                 if (err) console.warn(err.message);
             });
