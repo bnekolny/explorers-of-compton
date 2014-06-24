@@ -77,8 +77,10 @@ app.get('/tictactoe/api', function (request, response) {
 });
 
 app.post('/tictactoe/api', function (request, response) {
-    doc = {'player1': req.body.player1};
-    request.db.collection('tictactoe').insert(doc, function(err, objects) {
+    /* Params:
+     * player1
+     * player2 */
+    request.db.collection('tictactoe').save(request.body, function(err, objects) {
         if (err) {
             rollbar.reportMessage("Mongo error: " + err + "; objects: " + objects);
             console.error("Mongo error: " + err + "; objects: " + objects);
