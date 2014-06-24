@@ -59,6 +59,13 @@ getTicTacToeGames = function(callback) {
     });
 };
 
+getTicTacToeGame = function(id, callback) {
+    collection = mongo.collection('tictactoe');
+    collection.findOne( { _id: new ObjectId(id) }, function(err, item) {
+        callback(item);
+    });
+};
+
 app.get('/tictactoe', function(request, response) {
     games = getTicTacToeGames(function(games) {
         // If there aren't any games, create one
@@ -83,19 +90,25 @@ app.post('/tictactoe/api', function (request, response) {
     /* Params:
      * player1
      * player2 */
-    console.log(request.body);
+    // Don't let an ID property come in.
+    if (request.body._id) delete request.body.id
     request.db.collection('tictactoe').save(request.body, function(err, objects) {
-        if (err) {
-            rollbar.reportMessage("Mongo error: " + err + "; objects: " + objects);
-            console.error("Mongo error: " + err + "; objects: " + objects);
-        }
         response.send({'game': objects});
     });
 });
 
 app.get('/tictactoe/api/:id', function (request, response) {
-    request.db.collection('tictactoe').findOne( { _id : new ObjectId(request.params.id) }, function(err, item) {
+    getTicTacToeGame(request.params.id, function(item) {
         response.send({'game': item});
+    });
+});
+
+app.post('/tictactoe/api/:id', function (request, response) {
+    if (request.body._id) delete request.body.id
+    request.db.collection('tictactoe').update( { _id: new ObjectId(request.params.id) }, { $set: request.body }, function(err){
+        getTicTacToeGame(request.params.id, function(item) {
+            response.send({'game': item});
+        });
     });
 });
 
