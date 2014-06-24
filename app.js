@@ -3,6 +3,7 @@ var application_root = __dirname,
     bodyParser = require('body-parser'),
     rollbar = require('rollbar'),
     MongoClient = require('mongodb').MongoClient,
+    ObjectId = require('mongodb').ObjectID,
     format = require('util').format,
     path = require("path"),
     port = process.env.PORT || 5000;
@@ -35,6 +36,7 @@ MongoClient.connect(mongo_connection, function(err, db) {
     }
     mongo = db;
 })
+
 
 // Making mongo available on the request
 app.use(function(request, response, next) {
@@ -88,6 +90,12 @@ app.post('/tictactoe/api', function (request, response) {
             console.error("Mongo error: " + err + "; objects: " + objects);
         }
         response.send({'game': objects});
+    });
+});
+
+app.get('/tictactoe/api/:id', function (request, response) {
+    request.db.collection('tictactoe').findOne( { _id : new ObjectId(request.params.id) }, function(err, item) {
+        response.send({'game': item});
     });
 });
 
