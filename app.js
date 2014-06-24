@@ -8,12 +8,13 @@ var application_root = __dirname,
 
 var app = express();
 
-rollbar.init("578f9b3c0d9a4ab98c8dc63631709f9c");
+rollbar.init(process.env.ROLLBAR_ACCESS_TOKEN);
 
 // Database
 mongo_connection = null;
 app.configure('production', function () {
-    mongo_connection = 'mongodb://tictactoe:tictactoe@kahana.mongohq.com:10062/app26528232';
+    //mongo_connection = 'mongodb://tictactoe:tictactoe@kahana.mongohq.com:10062/app26528232';
+    mongo_connection = process.env.MONGOHQ_URL;
 });
 
 app.configure('development', function () {
@@ -81,7 +82,7 @@ app.configure(function() {
 });
 
 // Use the rollbar error handler to send exceptions to your rollbar account
-app.use(rollbar.errorHandler('578f9b3c0d9a4ab98c8dc63631709f9c'));
+app.use(rollbar.errorHandler(process.env.ROLLBAR_ACCESS_TOKEN));
 
 app.listen(port);
 
