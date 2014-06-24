@@ -12,13 +12,13 @@ var app = express();
 app.use(bodyParser.json());
 app.use(express.json());
 
-rollbar.init(process.env.ROLLBAR_ACCESS_TOKEN);
 
 // Database
 mongo_connection = null;
 app.configure('production', function () {
     //mongo_connection = 'mongodb://tictactoe:tictactoe@kahana.mongohq.com:10062/app26528232';
     mongo_connection = process.env.MONGOHQ_URL;
+    rollbar.init(process.env.ROLLBAR_ACCESS_TOKEN);
 });
 
 app.configure('development', function () {
@@ -80,6 +80,7 @@ app.post('/tictactoe/api', function (request, response) {
     /* Params:
      * player1
      * player2 */
+    console.log(request);
     request.db.collection('tictactoe').save(request.body, function(err, objects) {
         if (err) {
             rollbar.reportMessage("Mongo error: " + err + "; objects: " + objects);
@@ -102,5 +103,3 @@ app.configure(function() {
 app.use(rollbar.errorHandler(process.env.ROLLBAR_ACCESS_TOKEN));
 
 app.listen(port);
-
-//mongo.close()
