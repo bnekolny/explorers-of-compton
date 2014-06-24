@@ -10,7 +10,7 @@ var app = express();
 // Database
 mongo_connection = null;
 app.configure('production', function () {
-    mongo_connection = 'mongodb://tictactoe:bc64c5cb9171f5f562697926ba32d8ea@kahana.mongohq.com:10062/app26528232';
+    mongo_connection = 'mongodb://tictactoe:tictactoe@kahana.mongohq.com:10062/app26528232';
 });
 
 app.configure('development', function () {
