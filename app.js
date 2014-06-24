@@ -1,11 +1,14 @@
 var application_root = __dirname,
     express = require('express'),
+    rollbar = require('rollbar'),
     MongoClient = require('mongodb').MongoClient,
     format = require('util').format,
     path = require("path"),
     port = process.env.PORT || 5000;
 
 var app = express();
+
+rollbar.init("578f9b3c0d9a4ab98c8dc63631709f9c");
 
 // Database
 mongo_connection = null;
@@ -17,6 +20,7 @@ app.configure('development', function () {
     mongo_connection = 'mongodb://localhost:27017';
 });
 
+console.log(mongo_connection);
 var mongo = null;
 MongoClient.connect(mongo_connection, function(err, db) {
     if (err) {
@@ -74,6 +78,9 @@ app.configure(function() {
     app.use('/stylesheets', express.static(__dirname + '/stylesheets'));
     app.use('/sounds', express.static(__dirname + '/sounds'));
 });
+
+// Use the rollbar error handler to send exceptions to your rollbar account
+app.use(rollbar.errorHandler('578f9b3c0d9a4ab98c8dc63631709f9c'));
 
 app.listen(port);
 
