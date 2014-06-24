@@ -24,6 +24,7 @@ console.log(mongo_connection);
 var mongo = null;
 MongoClient.connect(mongo_connection, function(err, db) {
     if (err) {
+        rollbar.reportMessage(err);
         console.error(err);
     }
     mongo = db;
