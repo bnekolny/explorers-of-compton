@@ -1,7 +1,18 @@
-var express = require('express');
-var port = process.env.PORT || 5000;
-var app = express.createServer();
+var application_root = __dirname,
+    express = require('express'),
+    MongoClient = require('mongodb').MongoClient,
+    format = require('util').format,
+    path = require("path"),
+    port = process.env.PORT || 5000;
 
+var app = express();
+
+// Database
+
+var mongo = null;
+MongoClient.connect('mongodb://tictactoe:bc64c5cb9171f5f562697926ba32d8ea@kahana.mongohq.com:10062/app26528232', function(err, db) {
+    mongo = db;
+})
 
 
 app.get('/', function(request, response) {
