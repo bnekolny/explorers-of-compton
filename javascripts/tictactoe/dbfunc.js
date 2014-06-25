@@ -6,7 +6,6 @@ $(document).ready( function(){
 	var myForm = document.getElementById("create_game_form");
 
 	function createGame(form) {
-		alert("click");
 		$.post('/tictactoe/api', 
 		       { player1 : form.player1.value,
 		         player2 : form.player2.value } );
