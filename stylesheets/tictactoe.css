@@ -11,12 +11,11 @@ img {
 }
 
 #screen {
-	width: 300px;
+	float: left;
 }
 
 #header {
 	border: 25px solid blue;
-	width: 100%;
 	clear:both;
 	border-radius: 20px;
 	text-align:center;
@@ -28,7 +27,6 @@ img {
 	display: inline-block;
 	margin: 0px;
 	padding: 0px;
-	width:100%;
 	border-radius: 20px;
 	cursor: url(../images/pencil.png), auto;
 }
@@ -36,8 +34,16 @@ img {
 
 #footer {
 	border: 25px solid blue;
-	width: 100%;
 	clear:both;
 	border-radius: 20px;
 	text-align:center;
+}
+
+#dbdiv {
+	border: 10px solid green;
+	float: left;
+	display : block;	
+}
+#submitForm{
+	border-radius: 20px;
 }
