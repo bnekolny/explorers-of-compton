@@ -98,6 +98,12 @@ app.post('/tictactoe/api', function (request, response) {
     request.db.collection('tictactoe').save(request.body, function(err, objects) {
         response.send({'game': objects});
     });
+    
+    console.log(request.body);
+    // If it worked, set the header so the address bar doesn't still say /adduser
+    //response.location("tictactoe");
+    // And forward to success page
+    //response.redirect("tictactoe");
 });
 
 app.get('/tictactoe/api/:id', function (request, response) {
