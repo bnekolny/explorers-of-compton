@@ -1,8 +1,9 @@
-var createGame = function() {
-	var form = document.getElementById('createGame');
-
-   alert($.post('/tictactoe/api', 
-   	{player1 : form.elements.player1,
-   	player2 : form.elements.player2
-}));
+function createGame(form) {
+    $.post('/tictactoe/api', 
+   	       { player1 : form.player1.value,
+   	         player2 : form.player2.value } );
 };
+
+//$('#create_game_btn').addEventListener('click', function () {
+//    createGame($('#create_game_form'));
+//});

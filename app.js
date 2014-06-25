@@ -93,6 +93,7 @@ app.post('/tictactoe/api', function (request, response) {
     /* Params:
      * player1
      * player2 */
+    console.log(request.body);
     // Don't let an ID property come in.
     if (request.body._id) delete request.body.id
     request.db.collection('tictactoe').save(request.body, function(err, objects) {
