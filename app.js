@@ -51,6 +51,7 @@ app.get('/', function(request, response) {
 });
 
 
+// Method calls to get database objects
 getTicTacToeGames = function(callback) {
     collection = mongo.collection('tictactoe');
     collection.find().toArray(function(err, items) {
@@ -66,6 +67,8 @@ getTicTacToeGame = function(id, callback) {
     });
 };
 
+
+// "Views"
 app.get('/tictactoe', function(request, response) {
     games = getTicTacToeGames(function(games) {
         // If there aren't any games, create one
