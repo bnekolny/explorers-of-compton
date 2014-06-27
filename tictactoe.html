@@ -17,14 +17,35 @@
 		<img id='o' src='images/o.png'/>
 	</div>
 	<div id="dbdiv">
-		<div id="submitForm">
-			<H1> Database </H1>
+		<div id="login">
+			<!-- Initially this will just be a text field, but eventually could be a login -->
+			<h2>Login Info</h2>
+			<form id="login_form">
+				Player Name: <input type="text" placeholder="name" name="playerName">
+			</form>
+			<br>
+		</div>
+		<div class="dbdivLine"><br></div>
+
+		<!-- This div should be auto populated by the database using games matching the login name -->
+		<div id="listOfGames">
+			<H2>Load Game</h2>
+			<div class="gameSelect" id="1234">Jeff vs Brett, Moves = 5</div>
+			<div class="gameSelect" id="1235">Jeff vs Brett, Moves = 2</div>
+			<div class="gameSelect" id="1236">Jeff vs Brett, Moves = 3</div>
+			<br>
+		</div>
+		<div class="dbdivLine"><br></div>
+
+		<!-- Game creation should probably use login info and maybe leave player 2 unser or have option to -->
+		<div id="createNewGame">
+			<h2>Create Game</h2>
 			<form id="create_game_form">
 				Player1: <input type="text" placeholder="name" name="player1"><br>
 				Player2: <input type="text" placeholder="name" name="player2"><br>
 	            <button id="create_game_btn">Create Game </button>
-			</form>
 
+			</form>
 		</div>
 	</div>
   </body>

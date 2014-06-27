@@ -167,7 +167,7 @@ $(document).ready(function(){
         myContext.fillText("O Wins!",0,myH/2);        
       }
     }
-    if(stalemate){
+    else if(stalemate){
       myContext.font = "bold 80px Arial";
       myContext.fillText("Draw!",0,myH/2);
     }

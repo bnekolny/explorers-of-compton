@@ -31,6 +31,10 @@ img {
 	cursor: url(../images/pencil.png), auto;
 }
 
+.gameSelect:mouseOver{
+	background-color: gray;
+
+}
 
 #footer {
 	border: 25px solid blue;
@@ -42,8 +46,19 @@ img {
 #dbdiv {
 	border: 10px solid green;
 	float: left;
-	display : block;	
+	display : block;
+	height:470px;	
 }
-#submitForm{
-	border-radius: 20px;
+.dbdivLine{
+	background-color: green;
+}
+
+#listOfGames {
+
+
+}
+
+#createNewGame {
+	float:bottom;
+
 }
