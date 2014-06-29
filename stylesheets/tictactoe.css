@@ -4,6 +4,7 @@ body {
 	font-size: 10pt;
 	margin: 0px;
 	padding: 0px;
+	cursor: pointer;
 }
 
 img {
@@ -31,29 +32,27 @@ img {
 	cursor: url(../images/pencil.png), auto;
 }
 
-.gameSelect:mouseOver{
-	background-color: gray;
-
-}
 
 #footer {
 	border: 25px solid blue;
 	clear:both;
 	border-radius: 20px;
 	text-align:center;
+	padding-bottom: 20px;
 }
 
 #dbdiv {
 	border: 10px solid green;
 	float: left;
 	display : block;
-	height:470px;	
+	/*height:470px;*/	
 }
 .dbdivLine{
 	background-color: green;
 }
 
 #listOfGames {
+	padding-bottom: 20px;
 
 
 }
@@ -61,4 +60,11 @@ img {
 #createNewGame {
 	float:bottom;
 
+}
+
+.gameSelect:hover{
+	background-color: gray;
+}
+.highlight{
+	background-color: yellow;
 }
