@@ -53,12 +53,25 @@ img {
 
 #listOfGames {
 	padding-bottom: 20px;
+    height:120px;
+    overflow:scroll;
+    overflow-x:hidden;
+    border: 2px solid black;
 
 
 }
 
 #createNewGame {
 	float:bottom;
+
+}
+
+#gameInformation{
+	border: 10px solid purple;
+	height: 100%;
+	float:left;
+	display : block;
+
 
 }
 

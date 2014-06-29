@@ -26,6 +26,8 @@ $(document).ready(function(){
 
 	var webviewPlayerName = "";
 	var webviewGameIDSelection;
+	var webviewGamePlayer1Name = "";
+	var webviewGamePlayer2Name = "";
 
 
 
@@ -68,15 +70,33 @@ $(document).ready(function(){
 		});
 	};
 		listGames();
+		populateGameInformation();
 
-	var ok = function selectGameFromList(){
 
+
+	function loadGameInfo(gameID){
+		$.getJSON('/tictactoe/api/:' + gameID, function(data){
+			var items = [];
+			for(var entry in data){
+				var gameEntryData = data[entry];
+				webviewGamePlayer1Name = gameEntryData["player1"];
+				webviewGamePlayer2Name = gameEntryData["player2"];
+				populateGameInformation();
+			}
+		});
 	}
+
+
+
+
 
     $("#listOfGames").on("click",".gameSelect",function(event) {
 		webviewGameIDSelection = event.target.id;
 		$("div").removeClass("highlight");
 		$("#" + webviewGameIDSelection).addClass("highlight");
+
+		// Request game information specifically about this game using id
+		loadGameInfo(webviewGameIDSelection);
     });
 
     $("#login_form").change(function(){
@@ -85,6 +105,15 @@ $(document).ready(function(){
     	listGames();
 
     });
+
+
+    function populateGameInformation(){
+    	$('.currentGameInformation').remove();
+    	$("<div class='currentGameInformation' >" +
+    	"Player1: " + webviewGamePlayer1Name + " <BR> " +
+    	"Player2: " + webviewGamePlayer2Name + " <BR> " +
+    	"</div >" ).appendTo("#gameInformation");
+    }
 
 });
 

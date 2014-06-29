@@ -62,7 +62,8 @@ getTicTacToeGames = function(callback) {
 
 getTicTacToeGame = function(id, callback) {
     collection = mongo.collection('tictactoe');
-    collection.findOne( { _id: new ObjectId(id) }, function(err, item) {
+    //console.log(id.substring(1));
+    collection.findOne( { _id: id.substring(1) }, function(err, item) {
         callback(item);
     });
 };
