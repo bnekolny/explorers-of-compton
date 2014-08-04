@@ -179,11 +179,13 @@ $(document).ready(function(){
   // Process a mouse click
   var calcClick = function(mousePos){
 
+    var mousePos = getMousePos(canvasElement.get(0), mousePos);
+
     if(winnerFound == 0){
       var row=0;
       var col=0;
-      var adjX = mousePos.x - h.offsetLeft;
-      var adjY = mousePos.y - h.offsetTop;
+      var adjX = mousePos.x;
+      var adjY = mousePos.y;
       // Draw mouse over box
       if((adjX < h.width/3)){
         col =0;
