@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta ?http-?equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Flickr and Google Maps Mashup</title>
+    <style>
+        html, body, #map-canvas {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+    <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script type="text/javascript">
+        function sleep(millis, callback) {
+            setTimeout(function()
+                { callback(); }
+            , millis);
+        }
+
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(39.75,-104.87);
+            var mapOptions = {
+                zoom: 9,
+                center: myLatlng
+            }
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            markers = [];
+
+            sleep(1000, queryFlickr);
+            //queryFlickr()
+
+            google.maps.event.addListener(map, "bounds_changed", function() {
+                queryFlickr();
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        function photoSearchResults(data) {
+            // Deleting the old markers before we add the new
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            for (var i=0; i < data.photos.photo.length; i++)
+                if (data.photos.photo[i] && data.photos.photo[i].id) {
+                    photo_id = data.photos.photo[i].id;
+                    var photo_url = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=f62dec0edbe6b0299de97aedc9398c64&format=json&photo_id=";
+                    photo_url += photo_id;
+                    $.get( photo_url );
+                }
+        }
+
+        function photoResult(data) {
+            var lat = data.photo.location.latitude;
+            var lng = data.photo.location.longitude;
+            var image = "http://farm" + data.photo.farm + ".static.flickr.com/" +
+                data.photo.server + "/" + data.photo.id + "_" + data.photo.secret + "_" + "t.jpg";
+            var myLatlng = new google.maps.LatLng(lat,lng);
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                icon: image
+            });
+            markers.push(marker);
+        }
+
+        function jsonFlickrApi(data) {
+            if (data.photos) {
+                photoSearchResults(data);
+            } else if (data.photo) {
+                photoResult(data);
+            } else {
+                console.log("how did we get here?");
+            }
+
+        }
+
+        function queryFlickr() {
+            var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f62dec0edbe6b0299de97aedc9398c64&per_page=50&has_geo=1&format=json&tags=people&sort=interestingness-desc&content_type=1&media=photos";
+            var mb = map.getBounds()
+            url += "&bbox=" + mb.va.j + "," + mb.Ea.k + "," + mb.va.k + "," + mb.Ea.j;
+            $.get( url );
+        }
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
+<! -- <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=10&center=39.7376%2C-104.9847&key=AIzaSyCuvnyaYf_SiZ-U9gyAu8hapHp9ocCiGK0"></iframe> -->

@@ -50,6 +50,10 @@ app.get('/', function(request, response) {
     response.sendfile(__dirname + '/index.html');
 });
 
+// Flicker Map stuff
+app.get('/flickr-map', function(request, response) {
+    response.sendfile(__dirname + '/flickr-map.html');
+});
 
 // Method calls to get database objects
 getTicTacToeGames = function(callback) {
